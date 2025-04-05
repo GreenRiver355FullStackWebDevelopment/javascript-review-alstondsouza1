@@ -23,3 +23,40 @@ const reviews = [
 /////////////////////////////////////////////////////////////////////
 
 //Your Code Below Here////
+
+function renderReview(review) {
+
+  // create section review
+  const reviewDiv = document.createElement('div');
+  reviewDiv.classList.add('review_container'); 
+
+  // image element
+  const img = document.createElement('img'); 
+  img.src = review.image; 
+  reviewDiv.appendChild(image);
+
+  const details = document.createElement('div');
+
+  // username detials
+  const userParagraph = document.createElement('p');
+  userParagraph.textContent = review.username;
+  details.appendChild(userParagraph);
+
+  // star rating details
+  const starRating = document.createElement('p');
+  starRating.textContent = `${review.star} stars`; 
+  details.appendChild(starRating);
+
+  // review details
+  const textParagraph = document.createElement('p');
+  textParagraph.textContent = review.review; 
+  details.appendChild(textParagraph);
+
+  // appending the details to the reviewDiv
+  reviewDiv.appendChild(details);
+
+  // review section append
+  document.querySelector('.reviews').appendChild(reviewDiv);
+}
+
+reviews.forEach(renderReview);
