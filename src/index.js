@@ -22,21 +22,29 @@ const reviews = [
 ];
 /////////////////////////////////////////////////////////////////////
 
+//Your Code Below Here////
+
+import { calculateStarAverage } from './logic.js';
+
+// selecting the star rating element
+const starRatingElement = document.querySelector('.starRating');
+
 const form = document.querySelector('form');
 
+// form submit handler
 function handleSubmit(event) {
   event.preventDefault();
 
-  const username = document.querySelector('username').value;
-  const image = document.querySelector('image').value;
-  const star = document.querySelector('star').value;
-  const review = document.querySelector('review').value;
+  const username = document.querySelector('#username').value;
+  const image = document.querySelector('#image').value;
+  const star = document.querySelector('#star').value;
+  const review = document.querySelector('#review').value;
 
   const newReview = {
-    username: username,
-    image: image,
-    star: star,
-    review: review,
+    username,
+    image,
+    star,
+    review,
   };
 
   // adds new review to the reviews array
@@ -45,13 +53,14 @@ function handleSubmit(event) {
   // render the new review
   renderReview(newReview);
 
+  // update average stars
+  updateAverageStarRat();
+
   // clears inputs of the form
   form.reset();
 }
 
 form.addEventListener('submit', handleSubmit);
-
-//Your Code Below Here////
 
 function renderReview(review) {
 
@@ -62,7 +71,7 @@ function renderReview(review) {
   // image element
   const img = document.createElement('img'); 
   img.src = review.image; 
-  reviewDiv.appendChild(image);
+  reviewDiv.appendChild(img);
 
   const details = document.createElement('div');
 
@@ -88,4 +97,10 @@ function renderReview(review) {
   document.querySelector('.reviews').appendChild(reviewDiv);
 }
 
+function updateAverageStarRat() {
+  const average = calculateStarAverage(reviews); 
+  starRatingElement.textContent = `Star Rating: ${average.toFixed(1)} stars`;
+}
+
 reviews.forEach(renderReview);
+updateAverageStarRat(); 
